@@ -38,7 +38,7 @@
         <tr><td>Poste convoité</td><td>Digne de fréquenter Athina</td></tr>
         <tr><td>Type de contrat</td><td>Durée indéterminée</td></tr>
         <tr><td>Salaire demandé</td><td>0 €</td></tr>
-        <tr><td>Avantages en nature</td><td>Bonne humeur garantie</td></tr>
+        <tr><td>Avantages</td><td>Bonne humeur garantie</td></tr>
       </table>
 
       <p style="text-align:center; color: var(--encre-claire); font-size: 13px;">
@@ -490,6 +490,7 @@
         <tr><td>« I'm tired. »</td><td>😩</td></tr>
         <tr><td>« I'm the problem. »</td><td>🤦‍♂️</td></tr>
         <tr><td>« Don't worry about me. »</td><td>😐👍</td></tr>
+        <tr><td>« Ne vous inquiétez pas. J'ai du temps à perdre. »</td><td>🫡⏳</td></tr>
         <tr><td>« I knew it. »</td><td>😏</td></tr>
         <tr><td>« Je te l'avais prévenu. »</td><td>☝️😌</td></tr>
         <tr><td>« Est-ce que je suis fou ? »</td><td>🤨</td></tr>
@@ -596,6 +597,8 @@
         <tr><td>Risque n°10</td><td>Risque de rire de sa propre blague avant même de l'avoir terminée</td><td>🟢</td></tr>
         <tr><td>Risque n°11</td><td>Peut se lancer dans une explication extrêmement longue alors qu'une réponse de trois mots aurait suffi</td><td>🟠</td></tr>
         <tr><td>Risque n°12</td><td>Peut soudainement avoir une idée et décider qu'elle doit absolument être réalisée</td><td>🔴</td></tr>
+        <tr><td>Risque n°13</td><td>A tendance à « zoner » (zone out) — se déconnecter mentalement et partir dans ses pensées sans prévenir</td><td>🟡</td></tr>
+        <tr><td>Risque n°14</td><td>Capable de faire des listes de choses totalement inutiles ou aléatoires sur son téléphone</td><td>🟢</td></tr>
       </table>
 
       <p><strong>Niveau de danger :</strong><br>
@@ -693,7 +696,9 @@
           <div class="signature-boutons">
             <button class="bouton" onclick="effacerSignature('signature-papa')">Effacer</button>
             <button class="bouton vert" onclick="telechargerSignature('signature-papa', 'signature-papa.png')">Télécharger</button>
+            <button class="bouton vert" onclick="envoyerSignature('signature-papa', 'papa')">Envoyer</button>
           </div>
+          <p class="media-nom" id="confirmation-signature-papa" style="display:none"></p>
         </div>
 
         <div class="signature-bloc">
@@ -702,7 +707,9 @@
           <div class="signature-boutons">
             <button class="bouton" onclick="effacerSignature('signature-maman')">Effacer</button>
             <button class="bouton vert" onclick="telechargerSignature('signature-maman', 'signature-maman.png')">Télécharger</button>
+            <button class="bouton vert" onclick="envoyerSignature('signature-maman', 'maman')">Envoyer</button>
           </div>
+          <p class="media-nom" id="confirmation-signature-maman" style="display:none"></p>
         </div>
       </div>
     </div>
@@ -718,6 +725,9 @@
 
 </div>
 
+<!-- Librairie officielle Supabase (doit être chargée avant nos fichiers) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="supabase-integration.js" defer></script>
 <script src="script.js" defer></script>
 </body>
 </html>
