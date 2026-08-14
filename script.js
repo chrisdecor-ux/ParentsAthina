@@ -132,8 +132,7 @@ function lancerAnalysePere() {
     "Vérification de l'humour...",
     "Vérification du niveau de folie...",
     "Vérification du dossier Christopher...",
-    "❌ ERREUR — Le père est trop puissant pour être simulé.",
-    "Ne vous inquiétez pas. J'ai du temps à perdre."
+    "❌ ERREUR — Le père est trop puissant pour être simulé."
   ];
 
   var indexEtape = 0;
@@ -174,18 +173,25 @@ function cliquerRefuser() {
   // On cache les autres blocs de résultat au cas où
   document.getElementById("resultat-reflexion").classList.remove("visible");
   document.getElementById("resultat-acceptation").classList.remove("visible");
+
+  // Envoie la décision à Supabase (voir supabase-integration.js)
+  enregistrerDecision("refuser");
 }
 
 function afficherReflexion() {
   document.getElementById("resultat-reflexion").classList.add("visible");
   document.getElementById("resultat-refus").classList.remove("visible");
   document.getElementById("resultat-acceptation").classList.remove("visible");
+
+  enregistrerDecision("reflechir");
 }
 
 function afficherAcceptation() {
   document.getElementById("resultat-acceptation").classList.add("visible");
   document.getElementById("resultat-refus").classList.remove("visible");
   document.getElementById("resultat-reflexion").classList.remove("visible");
+
+  enregistrerDecision("accepter");
 }
 
 /* ============================================================
