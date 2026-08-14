@@ -65,6 +65,9 @@ async function enregistrerDecision(decision) {
 
   if (error) {
     console.error("Erreur lors de l'enregistrement de la décision :", error);
+    afficherToast("❌ Décision non enregistrée (voir console).", "erreur");
+  } else {
+    afficherToast("✅ Décision bien reçue.", "succes");
   }
 }
 
@@ -91,6 +94,7 @@ async function envoyerSignature(idCanvas, signataire) {
     if (erreurUpload) {
       console.error("Erreur lors de l'envoi de la signature :", erreurUpload);
       afficherMessageEnvoi(idCanvas, "❌ Échec de l'envoi. Réessaie.");
+      afficherToast("❌ Échec de l'envoi de la signature.", "erreur");
       return;
     }
 
@@ -102,17 +106,39 @@ async function envoyerSignature(idCanvas, signataire) {
 
     if (erreurTable) {
       console.error("Erreur lors de l'enregistrement de la signature :", erreurTable);
+      afficherToast("❌ Signature envoyée mais non enregistrée.", "erreur");
+      return;
     }
 
     afficherMessageEnvoi(idCanvas, "✅ Signature envoyée.");
+    afficherToast("✅ Signature bien reçue, merci !", "succes");
   }, "image/png");
 }
 
-// Petit message de confirmation affiché sous le canvas concerné.
+// Petit message de confirmation affiché sous le canvas concerné
+// (reste discret, en plus de la notification popup).
 function afficherMessageEnvoi(idCanvas, texte) {
   var id = "confirmation-" + idCanvas;
   var bloc = document.getElementById(id);
-  if (!bloc) return;
-  bloc.textContent = texte;
-  bloc.style.display = "block";
+  if (bloc) {
+    bloc.textContent = texte;
+    bloc.style.display = "block";
+  }
+}
+
+// Notification "toast" qui apparaît en haut de l'écran quelques
+// secondes, pour que l'envoi (ou l'échec) de la signature soit
+// vraiment visible, pas juste un petit texte discret.
+var minuteurToast = null;
+function afficherToast(texte, type) {
+  var toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = texte;
+  toast.className = "toast visible" + (type ? " " + type : "");
+
+  if (minuteurToast) clearTimeout(minuteurToast);
+  minuteurToast = setTimeout(function () {
+    toast.classList.remove("visible");
+  }, 3500);
 }
