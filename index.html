@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier de candidature — Poste de petit ami</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dossier">
+
+  <!-- En-tête façon document administratif -->
+  <div class="entete">
+    <span>RÉFÉRENCE : CX-ATHINA-001</span>
+    <span>DOSSIER CONFIDENTIEL</span>
+  </div>
+
+  <!-- Onglets numérotés : cliquer dessus va directement à la page correspondante -->
+  <div class="onglets" id="zone-onglets">
+    <!-- Les onglets sont générés automatiquement par script.js,
+         à partir de la liste des pages. Pas besoin d'y toucher à la main. -->
+  </div>
+
+  <div class="corps">
+
+    <!-- ============================================================
+         PAGE 0 : ACCUEIL
+         ============================================================ -->
+    <div class="page active" data-page="0">
+      <h1>Dossier de candidature</h1>
+      <p class="sous-titre">Accès confidentiel — usage réservé à la famille</p>
+
+      <div class="tampon">Confidentiel</div>
+
+      <table class="fiche">
+        <tr><td>Candidat</td><td>Christopher de Coriolis</td></tr>
+        <tr><td>Poste convoité</td><td>Digne de fréquenter Athina</td></tr>
+        <tr><td>Type de contrat</td><td>Durée indéterminée</td></tr>
+        <tr><td>Salaire demandé</td><td>0 €</td></tr>
+        <tr><td>Avantages en nature</td><td>Bonne humeur garantie</td></tr>
+      </table>
+
+      <p style="text-align:center; color: var(--encre-claire); font-size: 13px;">
+        ⚠️ Attention : ce dossier contient des informations extrêmement compromettantes
+        sur le candidat susmentionné.
+      </p>
+
+      <div class="zone-boutons">
+        <button class="bouton" onclick="allerA(1)">Commencer l'évaluation du candidat</button>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         PAGE 1 : PRÉSENTATION DU CANDIDAT
+         ============================================================ -->
+    <div class="page" data-page="1">
+      <h2>🧪 Présentation du candidat</h2>
+
+      <!--
+        IMAGE : photo-identite.png
+        À placer dans le même dossier que index.html / style.css / script.js.
+      -->
+      <div class="media-cadre">
+        <img src="photo-identite.png" alt="Photo d'identité du candidat" onerror="this.nextElementSibling.style.display='block'">
+        <p class="media-nom" style="display:none">photo-identite.png</p>
+      </div>
+
+      <table class="fiche">
+        <tr><td>Nom</td><td>Christopher de Coriolis</td></tr>
+        <tr><td>Date d'anniversaire</td><td>13 juillet 2005</td></tr>
+        <tr><td>Taille</td><td>Un peu plus qu'un mètre soixante-dix</td></tr>
+        <tr><td>Nationalité</td><td>Maurice 🇲🇺 et Australie 🇦🇺</td></tr>
+        <tr><td>Études</td><td>Ingénieur en énergie électrique, en formation</td></tr>
+        <tr><td>Expérience en séduction</td><td>Données confidentielles</td></tr>
+        <tr><td>Expérience face aux frères protecteurs</td><td>⭐⭐⭐⭐⭐</td></tr>
+      </table>
+
+      <p><strong>Objectif professionnel :</strong><br>
+      Faire rire Athina suffisamment longtemps pour qu'elle oublie mes défauts.</p>
+    </div>
+
+    <!-- ============================================================
+         PAGE 2 : POURQUOI CHRISTOPHER ?
+         Chaque compétence a son propre emplacement média.
+         Toutes les compétences ont une IMAGE, sauf "Sportif" qui a une VIDÉO EN BOUCLE.
+         ============================================================ -->
+    <div class="page" data-page="2">
+      <h2>🧠 Pourquoi Christopher ?</h2>
+
+      <!-- ===== Compétence n°1 — Intelligent ===== -->
+      <div class="competence">
+        <h3>Compétence n°1 — Intelligent</h3>
+
+        <!--
+          IMAGE : photo-intelligent.png
+          Photo de Christopher assis devant une feuille, très concentré, comme
+          s'il résolvait un problème mathématique complexe. Sur la feuille :
+          "TEST D'INTELLIGENCE — NIVEAU EXPERT", l'énoncé des frites,
+          "2 + 2 = 5" et en petit "BIG BROTHER APPROVED".
+        -->
+        <div class="media-cadre">
+          <img src="photo-intelligent.png" alt="Christopher en pleine concentration devant un test d'intelligence" onerror="this.nextElementSibling.style.display='block'">
+          <p class="media-nom" style="display:none">photo-intelligent.png</p>
+        </div>
+
+        <p class="rapport-titre">ANALYSE INTELLECTUELLE</p>
+        <table class="fiche">
+          <tr><td>Problème présenté au candidat</td><td>Addition de deux quantités identiques</td></tr>
+          <tr><td>Temps de réflexion</td><td>Confidentiel</td></tr>
+          <tr><td>Méthode utilisée</td><td>Non comprise par les analystes</td></tr>
+          <tr><td>Réponse finale</td><td>5</td></tr>
+        </table>
+        <p class="commentaire">Conclusion scientifique : le candidat semble capable de dépasser les limites traditionnelles des mathématiques.</p>
+        <p class="score">Score : 97/100</p>
+
+        <button class="bouton" onclick="lancerAnalyseIntelligence()">Voir la preuve</button>
+        <div class="resultat" id="resultat-analyse-intelligence"></div>
+      </div>
+
+      <!-- ===== Compétence n°2 — Drôle ===== -->
+      <div class="competence">
+        <h3>Compétence n°2 — Drôle</h3>
+
+        <p class="rapport-titre">ANALYSE DE L'HUMOUR</p>
+        <table class="fiche">
+          <tr><td>Nombre de blagues produites</td><td>Difficile à mesurer</td></tr>
+          <tr><td>Nombre de personnes ayant ri</td><td>Résultats variables selon les témoins</td></tr>
+          <tr><td>Blagues refusées par le comité</td><td>Dossier classifié</td></tr>
+        </table>
+        <p>Sources ayant confirmé que Christopher est drôle :</p>
+        <p class="commentaire">Christopher · Christopher · Une source indépendante dont l'identité doit rester confidentielle</p>
+        <p class="commentaire">Conclusion : le candidat présente une forte propension à faire des blagues, y compris lorsqu'aucune n'était nécessaire.</p>
+        <p class="score">Score : 98/100</p>
+
+        <!--
+          GALERIE 3 IMAGES (seul et unique média de cette compétence) :
+          photo-drole-mur-1.png, photo-drole-mur-2.png, photo-drole-mur-3.png
+          Trois photos de Christopher en train de "tester une blague" sur un mur,
+          à des instants légèrement différents (comme une petite séquence de
+          mouvement) : gauche → milieu → droite.
+        -->
+        <div class="media-galerie">
+          <div class="media-item">
+            <img src="photo-drole-mur-1.png" alt="Christopher testant une blague sur un mur, position 1" onerror="this.nextElementSibling.style.display='block'">
+            <p class="media-nom" style="display:none">photo-drole-mur-1.png</p>
+          </div>
+          <div class="media-item">
+            <img src="photo-drole-mur-2.png" alt="Christopher testant une blague sur un mur, position 2" onerror="this.nextElementSibling.style.display='block'">
+            <p class="media-nom" style="display:none">photo-drole-mur-2.png</p>
+          </div>
+          <div class="media-item">
+            <img src="photo-drole-mur-3.png" alt="Christopher testant une blague sur un mur, position 3" onerror="this.nextElementSibling.style.display='block'">
+            <p class="media-nom" style="display:none">photo-drole-mur-3.png</p>
+          </div>
+        </div>
+
+        <p class="rapport-titre">🧪 Analyse du sujet d'entraînement</p>
+        <p>Le candidat a été observé en train de tester ses blagues sur un mur.</p>
+        <p class="commentaire">Après plusieurs observations, il semblerait que Christopher utilise régulièrement ce mur comme cobaye humoristique. Le mur serait donc le premier à subir les nouvelles blagues avant leur diffusion auprès du public.</p>
+
+        <table class="fiche">
+          <tr><td>Nombre de blagues testées sur le mur</td><td>Inconnu</td></tr>
+          <tr><td>Nombre de réactions du mur</td><td>0</td></tr>
+          <tr><td>Nombre de fois où le mur a demandé d'arrêter</td><td>0</td></tr>
+          <tr><td>Nombre de fois où le mur a essayé de partir</td><td>0</td></tr>
+          <tr><td>Tolérance du cobaye</td><td>100/100</td></tr>
+          <tr><td>Capacité du cobaye à quitter l'expérience</td><td>0/100</td></tr>
+          <tr><td>Consentement du cobaye</td><td>Non confirmé</td></tr>
+        </table>
+
+        <p class="commentaire">Conclusion de l'expérience : le candidat semble avoir développé une méthode d'entraînement consistant à soumettre ses blagues à un public incapable de partir. Cette méthode permet d'obtenir un environnement de test particulièrement peu critique.</p>
+      </div>
+
+      <!-- ===== Compétence n°3 — Beau ===== -->
+      <div class="competence">
+        <h3>Compétence n°3 — Beau</h3>
+
+        <!--
+          IMAGE : photo-valorisante.png
+          Photo valorisante de Christopher, avec cadre de détection faciale,
+          points de repère et statistiques ajoutés graphiquement sur l'image
+          elle-même (cadre visage, points yeux/nez/mâchoire, lignes d'analyse).
+        -->
+        <div class="media-cadre">
+          <img src="photo-valorisante.png" alt="Analyse esthétique du candidat" onerror="this.nextElementSibling.style.display='block'">
+          <p class="media-nom" style="display:none">photo-valorisante.png</p>
+        </div>
+
+        <p class="rapport-titre">ANALYSE ESTHÉTIQUE TERMINÉE</p>
+        <table class="fiche">
+          <tr><td>Symétrie faciale</td><td>96 %</td></tr>
+          <tr><td>Structure de la mâchoire</td><td>94 %</td></tr>
+          <tr><td>Regard</td><td>98 %</td></tr>
+          <tr><td>Sourire</td><td>97 %</td></tr>
+          <tr><td>Cheveux</td><td>99 %</td></tr>
+          <tr><td>Potentiel photographique</td><td>100 %</td></tr>
+          <tr><td>Esthétique du corps</td><td>189,8 / 100</td></tr>
+        </table>
+        <p class="commentaire">Le système a rencontré plusieurs difficultés à déterminer un score supérieur à 100. Après consultation des autorités compétentes, le résultat du visage a été plafonné — celui du corps, en revanche, a dépassé toutes les échelles connues et n'a pas pu être corrigé à temps.</p>
+        <p style="text-align:center; font-size: 22px; font-weight: bold; letter-spacing: 1px;">BEAUTY SCORE<br>100 / 100</p>
+        <p class="commentaire" style="text-align:center;">Résultat certifié par une intelligence artificielle totalement impartiale.</p>
+        <p class="commentaire" style="text-align:center; font-size: 11px;">Intelligence artificielle développée et entraînée par Christopher.</p>
+      </div>
+
+      <!-- ===== Compétence n°4 — Sportif ===== -->
+      <div class="competence">
+        <h3>Compétence n°4 — Sportif</h3>
+
+        <!--
+          "controls" ajoute les boutons natifs du navigateur (lecture, pause,
+          volume, plein écran...). On enlève "autoplay" et "muted" : comme ça
+          la vidéo démarre avec le son dès qu'on clique play, et on peut la
+          mettre en pause à tout moment. "loop" la fait redémarrer toute seule
+          une fois terminée si on ne la met pas en pause.
+        -->
+        <div class="media-cadre">
+          <video src="video-sport.mp4" controls loop playsinline onerror="this.nextElementSibling.style.display='block'"></video>
+          <p class="media-nom" style="display:none">video-sport.mp4</p>
+        </div>
+
+        <p class="rapport-titre">STATISTIQUES ATHLÉTIQUES</p>
+
+        <!--
+          Profil : endurance / vitesse / agilité en tête (spécialités principales),
+          technique volontairement basse, puissance musculaire moyenne.
+        -->
+        <table class="fiche">
+          <tr><td>Endurance</td><td>96 / 100</td></tr>
+          <tr><td>Vitesse</td><td>88 / 100</td></tr>
+          <tr><td>Agilité</td><td>95 / 100</td></tr>
+          <tr><td>Explosivité</td><td>86 / 100</td></tr>
+          <tr><td>Coordination</td><td>93 / 100</td></tr>
+          <tr><td>Technique</td><td>40 / 100</td></tr>
+          <tr><td>Résistance</td><td>92 / 100</td></tr>
+          <tr><td>Puissance musculaire</td><td>76 / 100</td></tr>
+          <tr><td>Capacité à prétendre que ce n'était pas difficile après avoir souffert</td><td>100 / 100</td></tr>
+        </table>
+
+        <p><strong>Spécialité principale :</strong> endurance, vitesse et agilité.<br>
+        <strong>Point faible identifié :</strong> la technique, largement compensée par l'endurance et l'agilité.</p>
+
+        <p class="commentaire">
+          Endurance&nbsp; █████████░<br>
+          Vitesse&nbsp;&nbsp;&nbsp;&nbsp; ████████░░<br>
+          Agilité&nbsp;&nbsp;&nbsp;&nbsp; █████████░<br>
+          Technique&nbsp; ████░░░░░░<br>
+          Puissance&nbsp; ███████░░░
+        </p>
+
+        <p class="score" style="text-align:center;">PROFIL ATHLÉTIQUE VALIDÉ</p>
+        <p class="commentaire" style="text-align:center;">Comparaison avec des athlètes professionnels actuellement déconseillée par le service juridique.</p>
+      </div>
+
+      <!-- ===== Compétence n°5 — Bonne hygiène ===== -->
+      <div class="competence">
+        <h3>Compétence n°5 — Bonne hygiène</h3>
+
+        <!--
+          IMAGE : photo-hygiene.png
+          Une photo de Christopher propre, bien habillé ou en train de se préparer.
+        -->
+        <div class="media-cadre vignette">
+          <img src="photo-hygiene.png" alt="Christopher propre et bien habillé" onerror="this.nextElementSibling.style.display='block'">
+          <p class="media-nom" style="display:none">photo-hygiene.png</p>
+        </div>
+
+        <p class="rapport-titre">RAPPORT SANITAIRE</p>
+        <table class="fiche">
+          <tr><td>Analyse olfactive</td><td>Aucune menace détectée</td></tr>
+          <tr><td>Niveau de propreté</td><td>96 %</td></tr>
+          <tr><td>Risque biologique</td><td>Faible</td></tr>
+          <tr><td>Niveau de fraîcheur</td><td>Acceptablement élevé</td></tr>
+          <tr><td>Distance de sécurité recommandée</td><td>0 mètre</td></tr>
+        </table>
+
+        <p class="score" style="text-align:center;">✓ APPROCHE HUMAINE AUTORISÉE</p>
+        <p class="commentaire" style="text-align:center;">Le candidat peut être approché à moins de 2 mètres sans équipement de protection.</p>
+
+        <p><strong>Équipement recommandé :</strong></p>
+        <ul class="promesses">
+          <li>❌ Masque à gaz</li>
+          <li>❌ Combinaison NBC</li>
+          <li>❌ Lunettes de protection</li>
+          <li>❌ Pince à linge sur le nez</li>
+          <li>✓ Aucun équipement nécessaire</li>
+        </ul>
+
+        <p class="commentaire">Christopher est officiellement déclaré fréquentable dans les espaces clos.</p>
+        <p class="score">Score d'hygiène : 95/100</p>
+
+        <p class="rapport-titre">🧪 Analyse olfactive complémentaire</p>
+        <table class="fiche">
+          <tr><td>Produit utilisé</td><td>PHYDRA — The Mauritius Collection<br>CHOC FOR MEN</td></tr>
+          <tr><td>Origine</td><td>🇲🇺 Made in Mauritius</td></tr>
+          <tr><td>Format</td><td>50 mL / 1.8 FL OZ</td></tr>
+          <tr><td>Type</td><td>Eau de toilette</td></tr>
+          <tr><td>Fabricant</td><td>AJM Manufacturing Limited</td></tr>
+          <tr><td>Lieu</td><td>Caudan Waterfront, Port Louis, Mauritius</td></tr>
+          <tr><td>Composition détectée</td><td>Alcool · Fragrance · Eau</td></tr>
+        </table>
+        <p class="commentaire">Les autres composants restent confidentiels afin de protéger le savoir-faire mauricien.</p>
+
+        <table class="fiche">
+          <tr><td>Fraîcheur</td><td>96/100</td></tr>
+          <tr><td>Élégance</td><td>94/100</td></tr>
+          <tr><td>Pouvoir de séduction</td><td>98/100</td></tr>
+          <tr><td>Risque d'odeur désagréable</td><td>0,7 %</td></tr>
+          <tr><td>Distance d'approche autorisée</td><td>&lt; 2 mètres ✅</td></tr>
+        </table>
+
+        <p class="commentaire">Conclusion : le candidat a pris les mesures nécessaires afin de garantir des conditions d'approche humainement acceptables. Le candidat décline toute responsabilité en cas de compliments excessifs.</p>
+      </div>
+
+      <!-- ===== Compétence n°6 — Gentil ===== -->
+      <div class="competence">
+        <h3>Compétence n°6 — Gentil</h3>
+
+        <p class="rapport-titre">RAPPORT DES ACTIONS HUMANITAIRES</p>
+        <p>Christopher possède un historique conséquent d'actes de gentillesse envers son prochain.</p>
+        <p class="commentaire">Exemple documenté : un jour, Christopher a fait don de nourriture à une personne sans-abri.</p>
+
+        <table class="fiche">
+          <tr><td>Nature du don</td><td>🍞 Pain</td></tr>
+          <tr><td>État du pain</td><td>Extrêmement rassis</td></tr>
+          <tr><td>Motif du don</td><td>« Je n'arrivais plus à le mâcher »</td></tr>
+          <tr><td>Niveau de difficulté</td><td>Faible</td></tr>
+          <tr><td>Récompense demandée</td><td>Aucune</td></tr>
+          <tr><td>Générosité</td><td>87/100</td></tr>
+          <tr><td>Altruisme</td><td>64/100</td></tr>
+          <tr><td>Qualité du pain</td><td>12/100</td></tr>
+          <tr><td>Intention discutable</td><td>100/100</td></tr>
+          <tr><td>Nombre de fois où il a raconté son exploit ensuite</td><td>Donnée actuellement indisponible</td></tr>
+        </table>
+
+        <p class="commentaire">Conclusion : l'action reste techniquement considérée comme un acte de gentillesse.</p>
+        <p class="score">Score de gentillesse : 91/100</p>
+
+        <!--
+          IMAGE : photo-gentil.png
+          Christopher en train de méditer — montage réaliste où il semble
+          légèrement léviter au-dessus de son tapis. Placée juste avant
+          l'analyse de "paix intérieure" pour lui servir de preuve visuelle.
+        -->
+        <div class="media-cadre vignette">
+          <img src="photo-gentil.png" alt="Christopher en méditation, semblant léviter au-dessus de son tapis" onerror="this.nextElementSibling.style.display='block'">
+          <p class="media-nom" style="display:none">photo-gentil.png</p>
+        </div>
+
+        <p class="rapport-titre">🧘 Niveau de paix intérieure</p>
+        <p class="commentaire">Analyse spirituelle en cours...</p>
+        <p>Après plusieurs années de recherche intérieure, Christopher aurait atteint un niveau de sérénité inhabituellement élevé.</p>
+
+        <table class="fiche">
+          <tr><td>Fréquence des pensées parasites</td><td>3 %</td></tr>
+          <tr><td>Stress détecté</td><td>0,4 %</td></tr>
+          <tr><td>Agitation mentale</td><td>1 %</td></tr>
+          <tr><td>Ego</td><td>Données insuffisantes</td></tr>
+          <tr><td>Connexion avec l'univers</td><td>94 %</td></tr>
+          <tr><td>Gravité terrestre</td><td>Progressivement ignorée</td></tr>
+        </table>
+
+        <p class="rapport-titre" style="color: var(--rouge-tampon);">⚠️ Anomalie détectée</p>
+        <p>Le sujet ne semble plus être entièrement soumis aux lois de la gravité.</p>
+
+        <table class="fiche">
+          <tr><td>Niveau actuel</td><td>Méditation avancée</td></tr>
+          <tr><td>Niveau suivant</td><td>Maître spirituel</td></tr>
+          <tr><td>Niveau ultime</td><td>Sang</td></tr>
+        </table>
+
+        <p class="commentaire">Le passage au niveau « Sang » est actuellement estimé à 7–12 jours. Merci de ne pas déranger le sujet pendant son ascension.</p>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         PAGE 3 : CAPABLE DE PROTÉGER VOTRE FILLE
+         Ajout d'une image + d'une musique en boucle (ambiance "combat").
+         ============================================================ -->
+    <div class="page" data-page="3">
+      <h2>🛡️ Capable de protéger votre fille</h2>
+
+      <!--
+        IMAGE : photo-protection.png
+      -->
+      <div class="media-cadre">
+        <img src="photo-protection.png" alt="Photo illustrant la protection" onerror="this.nextElementSibling.style.display='block'">
+        <p class="media-nom" style="display:none">photo-protection.png</p>
+      </div>
+
+      <!--
+        AUDIO EN BOUCLE : musique-protection.mp3
+        "loop" fait rejouer la musique indéfiniment. La plupart des navigateurs
+        bloquent l'autoplay AVEC son tant que la personne n'a pas encore cliqué
+        quelque part sur la page ; "controls" reste là comme filet de sécurité
+        pour lancer la lecture manuellement si l'autoplay est bloqué.
+      -->
+      <div class="media-cadre">
+        <audio src="musique-protection.mp3" controls loop autoplay onerror="this.nextElementSibling.style.display='block'"></audio>
+        <p class="media-nom" style="display:none">musique-protection.mp3</p>
+      </div>
+
+      <p><strong>Test de protection</strong></p>
+      <table class="fiche">
+        <tr><td>Menace détectée</td><td>Frère jumeau surprotecteur</td></tr>
+        <tr><td>Niveau de difficulté</td><td>██████████ 10/10</td></tr>
+        <tr><td>Chances de victoire</td><td>Non communiqué par notre service juridique</td></tr>
+      </table>
+
+      <p>Christopher possède également une compétence rare :
+      savoir éviter les situations qui nécessitent réellement de se battre.</p>
+    </div>
+
+    <!-- ============================================================
+         PAGE 4 : MES INTENTIONS AVEC ATHINA (page sérieuse)
+         ============================================================ -->
+    <div class="page" data-page="4">
+      <h2>❤️ Mes intentions envers Athina</h2>
+
+      <div class="page-serieuse">
+        <p>Dans la situation quelque peu compliquée dans laquelle nous nous trouvons après les récents événements, je tiens tout de même à apporter une petite précision.</p>
+        <p>Mes intentions envers Athina sont sincères et respectueuses, et sont très loin de correspondre à certaines théories avancées par le frère jumeau.</p>
+        <p>Athina et moi nous entendons très bien, et j'apprécie sincèrement le temps que nous passons ensemble. Je ne prétends évidemment pas être parfait, mais je pense pouvoir affirmer, sans trop prendre de risques, que je ne suis pas une mauvaise influence pour elle.</p>
+      </div>
+
+      <p class="rapport-titre">En résumé</p>
+      <table class="fiche">
+        <tr><td>Intentions</td><td>Sincères et respectueuses</td></tr>
+        <tr><td>Mauvaise influence</td><td>Aucune preuve concluante à ce jour</td></tr>
+        <tr><td>Motivations cachées</td><td>Aucune détectée</td></tr>
+        <tr><td>Théories du frère jumeau</td><td>Sources à vérifier</td></tr>
+      </table>
+
+      <p style="text-align:center; color: var(--encre-claire);">
+        Bon. C'était suffisamment sérieux. On peut reprendre. 😂
+      </p>
+    </div>
+
+    <!-- ============================================================
+         PAGE 5 : CV DU CANDIDAT
+         Un CV "sérieux dans la forme, n'importe quoi dans le fond" :
+         mise en page classique de CV, mais rempli de questions absurdes/perso.
+         ============================================================ -->
+    <div class="page" data-page="5">
+      <h2>📄 Curriculum Vitae</h2>
+      <p class="sous-titre">Document officiel — section ressources humaines</p>
+
+      <!--
+        IMAGE : photo-cv.png
+        Une photo type "CV" du candidat, en haut du document, comme sur un
+        vrai CV (portrait, fond neutre).
+      -->
+      <div class="media-cadre vignette vignette-petite">
+        <img src="photo-cv.png" alt="Photo de CV du candidat" onerror="this.nextElementSibling.style.display='block'">
+        <p class="media-nom" style="display:none">photo-cv.png</p>
+      </div>
+
+      <table class="fiche">
+        <tr><td>Nom</td><td>Christopher de Coriolis</td></tr>
+        <tr><td>Poste convoité</td><td>Voir dossier complet</td></tr>
+        <tr><td>Couleur des yeux</td><td>Couleur locale</td></tr>
+        <tr><td>Sexualité</td><td>Hétérosexuelle (parfois remise en question par autrui, à tort)</td></tr>
+        <tr><td>Tempérament</td><td>Mélancolique · Phlegmatique</td></tr>
+        <tr><td>Ennéagramme</td><td>SX6 — « Strength »</td></tr>
+        <tr><td>MBTI</td><td>Confidentiel 🔒</td></tr>
+        <tr><td>Fonctions cognitives de Carl Jung</td><td>Confidentiel 🔒</td></tr>
+        <tr><td>Socionique</td><td>Confidentiel 🔒</td></tr>
+        <tr><td>Maison Harry Potter</td><td>🦅 Ravenclaw</td></tr>
+        <tr><td>Langage préféré</td><td>Python 🐍</td></tr>
+      </table>
+
+      <p class="rapport-titre">🧬 Literally me</p>
+      <ul class="promesses">
+        <li>Know nothing, know it all. 🤷‍♂️🧠</li>
+        <li>Overthink first. Act later. 🤔</li>
+        <li>Has a theory about almost everything. 🧪</li>
+        <li>Can turn a simple question into a three-hour conversation. 🗣️</li>
+        <li>May appear calm while internally running 47 different scenarios. 😐⚙️</li>
+        <li>Sometimes knows exactly what to do. Sometimes needs six business days to decide. 🧍‍♂️↔️</li>
+      </ul>
+
+      <p class="rapport-titre">💬 Catchphrases préférées</p>
+      <table class="fiche">
+        <tr><td>« I'm not smart, you are stupid. »</td><td>🧠☝️</td></tr>
+        <tr><td>« I'm not being rude, just honest. »</td><td>😐</td></tr>
+        <tr><td>« What time is it? »</td><td>⌚</td></tr>
+        <tr><td>« Never let them know your next move. »</td><td>🗿♟️</td></tr>
+        <tr><td>« My God, what have I done? »</td><td>😨</td></tr>
+        <tr><td>« I have no enemies. »</td><td>🕊️</td></tr>
+        <tr><td>« I'm tired. »</td><td>😩</td></tr>
+        <tr><td>« I'm the problem. »</td><td>🤦‍♂️</td></tr>
+        <tr><td>« Don't worry about me. »</td><td>😐👍</td></tr>
+        <tr><td>« I knew it. »</td><td>😏</td></tr>
+        <tr><td>« Je te l'avais prévenu. »</td><td>☝️😌</td></tr>
+        <tr><td>« Est-ce que je suis fou ? »</td><td>🤨</td></tr>
+        <tr><td>« C'est juste une blague. »</td><td>😭</td></tr>
+        <tr><td>« Ah, je suis con. »</td><td>🤦‍♂️</td></tr>
+        <tr><td>« I can't decide. »</td><td>🤷‍♂️↔️</td></tr>
+        <tr><td>« Grades don't matter. »</td><td>📉😎</td></tr>
+        <tr><td>« I have a theory. »</td><td>🧪🤔</td></tr>
+        <tr><td>« Hmmmmmm... »</td><td>🤔</td></tr>
+        <tr><td>« What have I become? »</td><td>🫠</td></tr>
+        <tr><td>« It's my fault. »</td><td>🙋‍♂️💀</td></tr>
+        <tr><td>« Monsieur, est-ce que je peux faire le travail tout seul ? »</td><td>🙋‍♂️📚</td></tr>
+        <tr><td>« Pourquoi est-ce qu'on est toujours là ? »</td><td>🫥</td></tr>
+        <tr><td>« I don't fear failure. I fear mediocrity dressed as success. »</td><td>🗿🔥</td></tr>
+      </table>
+
+      <p class="rapport-titre">🎯 Hobbies</p>
+      <ul class="promesses">
+        <li>💭 Daydreaming</li>
+        <li>🔬 La science</li>
+        <li>🧠 Overthinking</li>
+        <li>♟️ Les échecs</li>
+      </ul>
+
+      <p class="rapport-titre">📚 Courants philosophiques préférés</p>
+      <table class="fiche">
+        <tr><td>🥇</td><td>Stoïcisme</td></tr>
+        <tr><td>🥈</td><td>Existentialisme</td></tr>
+        <tr><td>🥉</td><td>Rationalisme</td></tr>
+      </table>
+
+      <p class="rapport-titre">🤝 Qualités que j'apprécie le plus chez les autres</p>
+      <ul class="promesses">
+        <li>• Ne pas avoir peur de dire la vérité</li>
+        <li>• Ne pas être con</li>
+      </ul>
+
+      <p class="rapport-titre">🧠 Informations diverses mais apparemment importantes</p>
+      <table class="fiche">
+        <tr><td>Pays que j'ai le plus envie de visiter</td><td>🇯🇵 Japon</td></tr>
+        <tr><td>Mon plus gros défaut</td><td>Je réfléchis beaucoup trop et je ne passe pas assez à l'action</td></tr>
+        <tr><td>Super-pouvoir que je choisirais</td><td>M'endormir instantanément en claquant des doigts</td></tr>
+        <tr><td>Personnage de fiction préféré</td><td>Fang Yuan — <em>Reverend Insanity</em></td></tr>
+        <tr><td>Mes plus grandes peurs</td><td>Les femmes, et gâcher mon potentiel</td></tr>
+        <tr><td>Si je gagnais 10 millions d'euros</td><td>M'offrir une vie stable, puis investir</td></tr>
+        <tr><td>Est-ce que j'ai peur de la mort ?</td><td>Non, pas du tout</td></tr>
+        <tr><td>Couleur préférée</td><td>Bleu marine</td></tr>
+        <tr><td>Salé ou sucré ?</td><td>Salé</td></tr>
+        <tr><td>Boisson préférée</td><td>De l'eau</td></tr>
+        <tr><td>Animal préféré</td><td>🐶 Le chien</td></tr>
+      </table>
+
+      <p class="rapport-titre">🗣️ Personnes que j'aimerais le plus rencontrer pour discuter avec elles</p>
+      <ul class="promesses">
+        <li>🏛️ Socrate</li>
+        <li>👑 Marc Aurèle</li>
+        <li>📖 Robert Greene</li>
+        <li>🧔 Tonton H</li>
+      </ul>
+
+      <p style="text-align:center; color: var(--encre-claire); font-size: 12px; margin-top: 20px;">
+        Document généré avec beaucoup trop de sérieux pour quelque chose qui était censé être une blague.
+      </p>
+    </div>
+
+    <!-- ============================================================
+         PAGE 6 : CE QUE JE PROMETS AUX PARENTS
+         ============================================================ -->
+    <div class="page" data-page="6">
+      <h2>👨‍👩‍👧 Ce que je promets aux parents</h2>
+
+      <ul class="promesses">
+        <li>☑️ De la respecter</li>
+        <li>☑️ De la faire rire</li>
+        <li>☑️ De répondre correctement aux messages</li>
+        <li>☑️ De ne pas prétendre avoir raison simplement parce que j'ai parlé avec beaucoup de confiance</li>
+        <li>☑️ De reconnaître quand j'ai tort</li>
+        <li>☑️ De continuer à apprendre à la connaître au lieu de faire semblant de tout savoir sur elle</li>
+        <li>☑️ De ne pas utiliser ce site comme argument lors d'un futur désaccord</li>
+        <li>☑️ De faire de mon mieux pour que le mot « Christopher » ne devienne jamais un sujet d'inquiétude familial</li>
+      </ul>
+
+      <p>Je promets également de ne pas essayer de soudoyer le père avec ce site.</p>
+      <p><em>Ceci n'est absolument pas une tentative de corruption.</em></p>
+      <p>Mais si ça fonctionne, je ne poserai pas de questions.</p>
+    </div>
+
+    <!-- ============================================================
+         PAGE 6 : LES RISQUES
+         ============================================================ -->
+    <div class="page" data-page="7">
+      <h2>💀 Risques liés à l'acceptation du candidat</h2>
+
+      <table class="fiche">
+        <tr><td>Risque n°1</td><td>Mange énormément</td><td>🔴</td></tr>
+        <tr><td>Risque n°2</td><td>Énergie très inégale : parfois beaucoup trop énergétique, parfois complètement à plat</td><td>🟠</td></tr>
+        <tr><td>Risque n°3</td><td>Parle beaucoup</td><td>🟡</td></tr>
+        <tr><td>Risque n°4</td><td>Peut faire des blagues dans des situations inappropriées</td><td>🟠</td></tr>
+        <tr><td>Risque n°5</td><td>Risque de vouloir transformer toute situation en compétition</td><td>🟢</td></tr>
+        <tr><td>Risque n°6</td><td>Probablement incapable de faire un site internet normal</td><td>🟠</td></tr>
+        <tr><td>Risque n°7</td><td>A eu l'idée de faire CE site</td><td>🔴</td></tr>
+        <tr><td>Risque n°8</td><td>Peut faire peur lorsqu'il se transforme en grand philosophe pendant ses heures perdues</td><td>🟠</td></tr>
+        <tr><td>Risque n°9</td><td>Pose beaucoup de questions</td><td>🟡</td></tr>
+        <tr><td>Risque n°10</td><td>Risque de rire de sa propre blague avant même de l'avoir terminée</td><td>🟢</td></tr>
+        <tr><td>Risque n°11</td><td>Peut se lancer dans une explication extrêmement longue alors qu'une réponse de trois mots aurait suffi</td><td>🟠</td></tr>
+        <tr><td>Risque n°12</td><td>Peut soudainement avoir une idée et décider qu'elle doit absolument être réalisée</td><td>🔴</td></tr>
+      </table>
+
+      <p><strong>Niveau de danger :</strong><br>
+      🟢 Faible &nbsp;·&nbsp; 🟡 Modéré &nbsp;·&nbsp; 🟠 Élevé &nbsp;·&nbsp; 🔴 Christopher</p>
+    </div>
+
+    <!-- ============================================================
+         PAGE 7 : ÉVALUATION DU PÈRE
+         ============================================================ -->
+    <div class="page" data-page="8">
+      <h2>👨‍⚖️ Évaluation du père</h2>
+
+      <div class="jauge-ligne">
+        Critère 1 — Capacité à supporter les blagues du père
+        <div class="jauge-fond"><div class="jauge-remplie depasse" style="width:100%"></div></div>
+        200 %
+        <p class="commentaire">A beaucoup entendu parler du père et l'apprécie déjà énormément, avant même de l'avoir rencontré.</p>
+      </div>
+      <div class="jauge-ligne">
+        Critère 2 — Capacité à survivre à un interrogatoire
+        <div class="jauge-fond"><div class="jauge-remplie" style="width:90%"></div></div>
+        90 %
+        <p class="commentaire">(Capacité à rester concentré dans les situations tendues.)</p>
+      </div>
+      <div class="jauge-ligne">
+        Critère 3 — Capacité à gagner sa confiance
+        <div class="jauge-fond"><div class="jauge-remplie inconnue" style="width:100%"></div></div>
+        ❓ Inconnu — à déterminer
+      </div>
+
+      <p style="text-align:center;">Objectif : atteindre 100 %.</p>
+
+      <div class="zone-boutons">
+        <button class="bouton" onclick="lancerAnalysePere()">Demander l'approbation du père</button>
+      </div>
+      <div class="resultat" id="resultat-analyse-pere"></div>
+    </div>
+
+    <!-- ============================================================
+         PAGE 8 : ÉVALUATION DE LA MÈRE
+         ============================================================ -->
+    <div class="page" data-page="9">
+      <h2>👩 Évaluation de la mère</h2>
+
+      <p><strong>Mission principale :</strong> vérifier que Christopher n'est pas un psychopathe.</p>
+
+      <table class="fiche">
+        <tr><td>Résultat préliminaire</td><td>🟢 Probablement humain</td></tr>
+        <tr><td>Niveau de politesse</td><td>🟢 Acceptable</td></tr>
+        <tr><td>Niveau de bêtises</td><td>🔴 Inquiétant</td></tr>
+        <tr><td>Intentions envers Athina</td><td>🟢 Sérieuses</td></tr>
+      </table>
+    </div>
+
+    <!-- ============================================================
+         PAGE 9 : DÉCISION FINALE
+         ============================================================ -->
+    <div class="page" data-page="10">
+      <h2>🏆 Décision finale</h2>
+
+      <!-- Zone visible tant qu'aucune décision n'a été prise -->
+      <div id="zone-decision">
+        <p style="text-align:center;">Merci de rendre votre verdict :</p>
+        <div class="cases-decision">
+          <button class="bouton rouge" onclick="cliquerRefuser()">❌ Refuser</button>
+          <button class="bouton" onclick="afficherReflexion()">🤔 Réfléchir</button>
+          <button class="bouton vert" onclick="afficherAcceptation()">❤️ Accepter</button>
+        </div>
+      </div>
+
+      <!-- Ce bloc s'affiche uniquement pendant la petite comédie du refus -->
+      <div class="resultat" id="resultat-refus"></div>
+
+      <!-- Ce bloc s'affiche si on clique sur "Réfléchir" -->
+      <div class="resultat" id="resultat-reflexion">
+        Prenez votre temps. Christopher, lui, ne dort plus depuis deux mois.
+      </div>
+
+      <!-- Ce bloc s'affiche si on clique sur "Accepter" -->
+      <div class="resultat" id="resultat-acceptation">
+        <p style="text-align:center; font-size: 20px;">🎉 Félicitations !</p>
+        <p style="text-align:center;">Votre candidature a été acceptée.</p>
+        <p style="text-align:center;">Christopher est désormais officiellement autorisé
+        à continuer à apprécier Athina.</p>
+        <p style="text-align:center;">Merci de signer ci-dessous (avec la souris ou le doigt) :</p>
+
+        <div class="signature-bloc">
+          <p class="signature-label">Signature du papa</p>
+          <!--
+            Rien n'est enregistré automatiquement : le dessin vit uniquement
+            dans le navigateur. Le bouton "Télécharger" permet de le sauvegarder
+            en vraie image PNG sur l'appareil si on veut le garder.
+          -->
+          <canvas class="signature-canvas" id="signature-papa" width="300" height="120"></canvas>
+          <div class="signature-boutons">
+            <button class="bouton" onclick="effacerSignature('signature-papa')">Effacer</button>
+            <button class="bouton vert" onclick="telechargerSignature('signature-papa', 'signature-papa.png')">Télécharger</button>
+          </div>
+        </div>
+
+        <div class="signature-bloc">
+          <p class="signature-label">Signature de la maman</p>
+          <canvas class="signature-canvas" id="signature-maman" width="300" height="120"></canvas>
+          <div class="signature-boutons">
+            <button class="bouton" onclick="effacerSignature('signature-maman')">Effacer</button>
+            <button class="bouton vert" onclick="telechargerSignature('signature-maman', 'signature-maman.png')">Télécharger</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- fin .corps -->
+
+  <!-- Pied de page : numéro de page + navigation précédent/suivant -->
+  <div class="pied">
+    <button class="bouton" onclick="pagePrecedente()">◀ Précédent</button>
+    <span class="numero-page" id="indicateur-page">Page 1 / 10</span>
+    <button class="bouton" onclick="pageSuivante()">Suivant ▶</button>
+  </div>
+
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
