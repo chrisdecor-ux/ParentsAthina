@@ -409,3 +409,33 @@ h2 {
   .corps { padding: 22px 16px; }
   .entete { flex-direction: column; gap: 6px; text-align: center; }
 }
+
+/* Notification "toast" qui apparaît en haut de l'écran (ex. après
+   l'envoi d'une signature), et disparaît toute seule après un moment. */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: var(--accent);
+  color: var(--papier);
+  padding: 14px 22px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast.erreur {
+  background: var(--rouge-tampon);
+}
+.toast.succes {
+  background: var(--vert-ok);
+}
