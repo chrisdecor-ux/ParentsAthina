@@ -150,6 +150,36 @@ function lancerAnalysePere() {
 }
 
 /* ============================================================
+   PAGE "ÉVALUATION DE LA MÈRE" : petite animation de fausse analyse
+   qui se termine par un crash lié à la ressemblance mère/fille
+   ============================================================ */
+function lancerAnalyseMere() {
+  var bloc = document.getElementById("resultat-analyse-mere");
+  bloc.classList.add("visible");
+
+  var etapes = [
+    "Analyse faciale en cours...",
+    "Comparaison avec le profil d'Athina...",
+    "Taux de ressemblance : anormalement élevé.",
+    "Tentative de différenciation des deux profils...",
+    "⚠️ ERREUR — Impossible de distinguer la mère de la fille.",
+    "❌ SYSTÈME EN PANNE — Ressemblance trop élevée pour être traitée. Veuillez réessayer avec un être humain moins parfaitement dupliqué."
+  ];
+
+  var indexEtape = 0;
+  bloc.textContent = etapes[0];
+
+  var minuteur = setInterval(function() {
+    indexEtape = indexEtape + 1;
+    if (indexEtape >= etapes.length) {
+      clearInterval(minuteur);
+      return;
+    }
+    bloc.textContent = etapes[indexEtape];
+  }, 900);
+}
+
+/* ============================================================
    PAGE "DÉCISION FINALE" : la petite comédie du bouton "Refuser"
    ============================================================ */
 var etapeRefus = 0; // compte combien de fois on a cliqué sur "Refuser"
@@ -158,7 +188,7 @@ var messagesRefus = [
   "Êtes-vous vraiment sûr ?",
   "Êtes-vous vraiment vraiment sûr ?",
   "Dernière chance.",
-  "🤖 ERREUR 404 : AUCUNE RÉPONSE ACCEPTABLE DÉTECTÉE DANS VOTRE SYSTÈME DE DÉCISION. VEUILLEZ RÉESSAYER, HUMAIN."
+  "🤖 ERREUR 404 : AUCUNE RÉPONSE ACCEPTABLE DÉTECTÉE DANS VOTRE SYSTÈME DE DÉCISION."
 ];
 
 function cliquerRefuser() {
