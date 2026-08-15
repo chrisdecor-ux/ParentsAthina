@@ -6,8 +6,8 @@
    "anon public", récupérées dans Supabase > Project Settings > API.
    ============================================================ */
 
-const SUPABASE_URL = "https://zyhsgdrdifasllyjkait.supabase.co";
-const SUPABASE_CLE_PUBLIQUE = "sb_publishable_d8ie8GqPf9G8Ei3L0FDuFw_SXxsgJWB";
+const SUPABASE_URL = "https://pcmpmrmiisqhcmtoxpmh.supabase.co";
+const SUPABASE_CLE_PUBLIQUE = "sb_publishable_rjuXX9dSKc6a6Ei_5HQRfQ_Pj35cI5U";
 
 // On vérifie que la librairie Supabase (chargée depuis le CDN, dans le
 // <script> juste avant celui-ci) est bien disponible AVANT de s'en servir.
