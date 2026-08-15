@@ -113,7 +113,12 @@ async function envoyerSignature(idCanvas, signataire) {
   }
 
   var visiteurId = obtenirVisiteurId();
-  var nomFichier = signataire + "-" + visiteurId + "-" + Date.now() + ".png";
+  // Le timestamp est placé EN PREMIER dans le nom de fichier. Comme ça,
+  // trier les fichiers par ordre alphabétique (ce que fait la plupart
+  // des interfaces par défaut) revient à les trier par ordre chronologique,
+  // sans que "papa" et "maman" viennent casser l'ordre en se mélangeant
+  // par initiale.
+  var nomFichier = Date.now() + "-" + signataire + "-" + visiteurId + ".png";
 
   // On transforme le canvas en "blob" (fichier binaire en mémoire),
   // c'est le format attendu par l'upload Supabase.
@@ -176,3 +181,35 @@ function afficherToast(texte, type) {
     toast.classList.remove("visible");
   }, 3500);
 }
+
+/* ============================================================
+   SUIVI DE TOUS LES AUTRES CLICS DU SITE
+   ("Commencer l'évaluation", Précédent/Suivant, les onglets
+   numérotés, "Voir la preuve", Effacer/Télécharger/Envoyer, etc.)
+
+   Ça réutilise directement la table reponses_finales (et donc la
+   fonction enregistrerDecision déjà définie plus haut) : pas besoin
+   de créer une nouvelle table ni une nouvelle policy Supabase.
+   Le texte affiché sur le bouton sert de valeur pour la colonne
+   "decision", ex. "➡ Suivant" ou "Voir la preuve".
+
+   Les 3 boutons de la page finale (Refuser / Réfléchir / Accepter)
+   sont EXCLUS ici, parce qu'ils sont déjà suivis individuellement
+   par script.js avec un libellé propre ("refuser", "reflechir",
+   "accepter") — sans ça, chaque clic dessus créerait 2 lignes au
+   lieu d'une.
+   ============================================================ */
+document.addEventListener("click", function (evt) {
+  var element = evt.target.closest("button, .onglet");
+  if (!element) return;
+
+  var declencheur = element.getAttribute("onclick") || "";
+  var dejaSuiviAilleurs =
+    declencheur.indexOf("cliquerRefuser") !== -1 ||
+    declencheur.indexOf("afficherReflexion") !== -1 ||
+    declencheur.indexOf("afficherAcceptation") !== -1;
+  if (dejaSuiviAilleurs) return;
+
+  var texte = (element.textContent || "").trim().slice(0, 80);
+  enregistrerDecision(texte || ("clic:" + (element.id || "bouton sans nom")));
+});
