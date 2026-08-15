@@ -71,7 +71,7 @@ async function obtenirAdresseIP() {
    ============================================================ */
 async function enregistrerDecision(decision) {
   if (!supabaseClient) {
-    afficherToast("❌ Connexion à la base de données indisponible.", "erreur");
+    console.error("Connexion à la base de données indisponible.");
     return;
   }
 
@@ -87,17 +87,13 @@ async function enregistrerDecision(decision) {
     });
 
     if (error) {
+      // Aucune notification visible pour ces boutons : la personne ne doit
+      // rien remarquer. L'erreur reste visible uniquement dans la console,
+      // pour toi si tu dois déboguer.
       console.error("Erreur lors de l'enregistrement de la décision :", error);
-      afficherToast("❌ Décision non enregistrée (voir console).", "erreur");
-    } else {
-      afficherToast("✅ Décision bien reçue.", "succes");
     }
   } catch (erreurInattendue) {
-    // Filet de sécurité : si quoi que ce soit plante avant même d'arriver
-    // jusqu'à Supabase (erreur réseau, librairie mal chargée, etc.), on
-    // l'affiche quand même au lieu de laisser le clic ne rien faire.
     console.error("Erreur inattendue dans enregistrerDecision :", erreurInattendue);
-    afficherToast("❌ Erreur technique (voir console).", "erreur");
   }
 }
 
@@ -112,8 +108,8 @@ async function envoyerSignature(idCanvas, signataire) {
   if (!canvas) return;
 
   if (!supabaseClient) {
-    afficherMessageEnvoi(idCanvas, "❌ Connexion à la base de données indisponible.");
-    afficherToast("❌ Connexion à la base de données indisponible.", "erreur");
+    afficherMessageEnvoi(idCanvas, "❌ L'envoi de la signature au candidat a échoué.");
+    afficherToast("❌ L'envoi de la signature au candidat a échoué.", "erreur");
     return;
   }
 
@@ -130,8 +126,8 @@ async function envoyerSignature(idCanvas, signataire) {
 
       if (erreurUpload) {
         console.error("Erreur lors de l'envoi de la signature :", erreurUpload);
-        afficherMessageEnvoi(idCanvas, "❌ Échec de l'envoi. Réessaie.");
-        afficherToast("❌ Échec de l'envoi de la signature.", "erreur");
+        afficherMessageEnvoi(idCanvas, "❌ L'envoi de la signature au candidat a échoué.");
+        afficherToast("❌ L'envoi de la signature au candidat a échoué.", "erreur");
         return;
       }
 
@@ -143,18 +139,19 @@ async function envoyerSignature(idCanvas, signataire) {
 
       if (erreurTable) {
         console.error("Erreur lors de l'enregistrement de la signature :", erreurTable);
-        afficherToast("❌ Signature envoyée mais non enregistrée.", "erreur");
+        afficherMessageEnvoi(idCanvas, "❌ L'envoi de la signature au candidat a échoué.");
+        afficherToast("❌ L'envoi de la signature au candidat a échoué.", "erreur");
         return;
       }
 
-      afficherMessageEnvoi(idCanvas, "✅ C'est bon, le candidat a bien reçu votre signature !");
-      afficherToast("✅ C'est bon, le candidat a bien reçu votre signature !", "succes");
+      afficherMessageEnvoi(idCanvas, "✅ Le candidat a bien reçu votre signature.");
+      afficherToast("✅ Le candidat a bien reçu votre signature.", "succes");
     } catch (erreurInattendue) {
       // Même filet de sécurité que pour enregistrerDecision : on affiche
       // l'erreur au lieu de la laisser disparaître silencieusement.
       console.error("Erreur inattendue dans envoyerSignature :", erreurInattendue);
-      afficherMessageEnvoi(idCanvas, "❌ Erreur technique (voir console).");
-      afficherToast("❌ Erreur technique (voir console).", "erreur");
+      afficherMessageEnvoi(idCanvas, "❌ L'envoi de la signature au candidat a échoué.");
+      afficherToast("❌ L'envoi de la signature au candidat a échoué.", "erreur");
     }
   }, "image/png");
 }
