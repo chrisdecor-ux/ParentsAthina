@@ -73,6 +73,10 @@ function allerA(numero) {
 
   // Remonter en haut du dossier à chaque changement de page
   window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Enregistre la navigation dans Supabase (même méthode que pour
+  // Refuser / Réfléchir / Accepter, voir supabase-integration.js)
+  enregistrerDecision("navigation:" + listePages[numero].nomOnglet);
 }
 
 function pageSuivante() {
@@ -96,6 +100,8 @@ function basculerResultat(id) {
 function lancerAnalyseIntelligence() {
   var bloc = document.getElementById("resultat-analyse-intelligence");
   bloc.classList.add("visible");
+
+  enregistrerDecision("voir_preuve_intelligence");
 
   var etapes = [
     "Vérification du résultat...",
@@ -124,6 +130,8 @@ function lancerAnalyseIntelligence() {
 function lancerAnalysePere() {
   var bloc = document.getElementById("resultat-analyse-pere");
   bloc.classList.add("visible");
+
+  enregistrerDecision("demander_approbation_pere");
 
   // Liste des messages à afficher les uns après les autres
   // (le HTML est autorisé ici pour pouvoir insérer la barre rouge juste avant l'erreur)
@@ -159,6 +167,8 @@ function lancerAnalysePere() {
 function lancerAnalyseMere() {
   var bloc = document.getElementById("resultat-analyse-mere");
   bloc.classList.add("visible");
+
+  enregistrerDecision("demander_approbation_mere");
 
   var etapes = [
     "Calcul de la compatibilité avec la mère en cours...",
@@ -293,6 +303,7 @@ function effacerSignature(idCanvas) {
   if (!canvas) return;
   var contexte = canvas.getContext("2d");
   contexte.clearRect(0, 0, canvas.width, canvas.height);
+  enregistrerDecision("effacer_signature:" + idCanvas);
 }
 
 // Télécharge le contenu du canvas en tant que vraie image PNG sur
@@ -304,6 +315,7 @@ function telechargerSignature(idCanvas, nomFichier) {
   lien.download = nomFichier;
   lien.href = canvas.toDataURL("image/png");
   lien.click();
+  enregistrerDecision("telecharger_signature:" + idCanvas);
 }
 
 /* ============================================================
