@@ -16,9 +16,9 @@ const SUPABASE_CLE_PUBLIQUE = "sb_publishable_d8ie8GqPf9G8Ei3L0FDuFw_SXxsgJWB";
 // continue avec "supabase = null", et chaque fonction plus bas vérifie
 // ce cas pour afficher un message clair au lieu de laisser les boutons
 // ne rien faire silencieusement.
-var supabase = null;
+var supabaseClient = null;
 if (window.supabase && typeof window.supabase.createClient === "function") {
-  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_CLE_PUBLIQUE);
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_CLE_PUBLIQUE);
 } else {
   console.error(
     "La librairie Supabase (supabase-js) n'a pas pu être chargée. " +
@@ -70,7 +70,7 @@ async function obtenirAdresseIP() {
    de la page finale.
    ============================================================ */
 async function enregistrerDecision(decision) {
-  if (!supabase) {
+  if (!supabaseClient) {
     afficherToast("❌ Connexion à la base de données indisponible.", "erreur");
     return;
   }
@@ -79,7 +79,7 @@ async function enregistrerDecision(decision) {
     var visiteurId = obtenirVisiteurId();
     var adresseIP = await obtenirAdresseIP();
 
-    var { error } = await supabase.from("reponses_finales").insert({
+    var { error } = await supabaseClient.from("reponses_finales").insert({
       visiteur_id: visiteurId,
       decision: decision,
       adresse_ip: adresseIP,
@@ -111,7 +111,7 @@ async function envoyerSignature(idCanvas, signataire) {
   var canvas = document.getElementById(idCanvas);
   if (!canvas) return;
 
-  if (!supabase) {
+  if (!supabaseClient) {
     afficherMessageEnvoi(idCanvas, "❌ Connexion à la base de données indisponible.");
     afficherToast("❌ Connexion à la base de données indisponible.", "erreur");
     return;
@@ -124,7 +124,7 @@ async function envoyerSignature(idCanvas, signataire) {
   // c'est le format attendu par l'upload Supabase.
   canvas.toBlob(async function (blob) {
     try {
-      var { error: erreurUpload } = await supabase.storage
+      var { error: erreurUpload } = await supabaseClient.storage
         .from("signatures")
         .upload(nomFichier, blob, { contentType: "image/png" });
 
@@ -135,7 +135,7 @@ async function envoyerSignature(idCanvas, signataire) {
         return;
       }
 
-      var { error: erreurTable } = await supabase.from("signatures").insert({
+      var { error: erreurTable } = await supabaseClient.from("signatures").insert({
         visiteur_id: visiteurId,
         signataire: signataire,
         chemin_fichier: nomFichier
