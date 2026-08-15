@@ -167,7 +167,7 @@ function lancerAnalyseMere() {
     "Comparaison avec le profil d'Athina...",
     "⚠️ Interruption détectée — corruption des données du profil analysé.",
     '<div class="jauge-fond"><div class="jauge-remplie depasse" style="width:100%"></div></div>',
-    "❌ ERREUR — Le système confond la mère avec sa fille, la ressemblance est trop élevée."
+    "❌ ERREUR — Impossible de calculer l'approbation de la mère : le système la confond avec sa fille, la ressemblance est trop élevée."
   ];
 
   var indexEtape = 0;
