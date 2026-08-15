@@ -53,21 +53,29 @@ async function obtenirAdresseIP() {
    de la page finale.
    ============================================================ */
 async function enregistrerDecision(decision) {
-  var visiteurId = obtenirVisiteurId();
-  var adresseIP = await obtenirAdresseIP();
+  try {
+    var visiteurId = obtenirVisiteurId();
+    var adresseIP = await obtenirAdresseIP();
 
-  var { error } = await supabase.from("reponses_finales").insert({
-    visiteur_id: visiteurId,
-    decision: decision,
-    adresse_ip: adresseIP,
-    navigateur: navigator.userAgent
-  });
+    var { error } = await supabase.from("reponses_finales").insert({
+      visiteur_id: visiteurId,
+      decision: decision,
+      adresse_ip: adresseIP,
+      navigateur: navigator.userAgent
+    });
 
-  if (error) {
-    console.error("Erreur lors de l'enregistrement de la décision :", error);
-    afficherToast("❌ Décision non enregistrée (voir console).", "erreur");
-  } else {
-    afficherToast("✅ Décision bien reçue.", "succes");
+    if (error) {
+      console.error("Erreur lors de l'enregistrement de la décision :", error);
+      afficherToast("❌ Décision non enregistrée (voir console).", "erreur");
+    } else {
+      afficherToast("✅ Décision bien reçue.", "succes");
+    }
+  } catch (erreurInattendue) {
+    // Filet de sécurité : si quoi que ce soit plante avant même d'arriver
+    // jusqu'à Supabase (erreur réseau, librairie mal chargée, etc.), on
+    // l'affiche quand même au lieu de laisser le clic ne rien faire.
+    console.error("Erreur inattendue dans enregistrerDecision :", erreurInattendue);
+    afficherToast("❌ Erreur technique (voir console).", "erreur");
   }
 }
 
@@ -87,31 +95,39 @@ async function envoyerSignature(idCanvas, signataire) {
   // On transforme le canvas en "blob" (fichier binaire en mémoire),
   // c'est le format attendu par l'upload Supabase.
   canvas.toBlob(async function (blob) {
-    var { error: erreurUpload } = await supabase.storage
-      .from("signatures")
-      .upload(nomFichier, blob, { contentType: "image/png" });
+    try {
+      var { error: erreurUpload } = await supabase.storage
+        .from("signatures")
+        .upload(nomFichier, blob, { contentType: "image/png" });
 
-    if (erreurUpload) {
-      console.error("Erreur lors de l'envoi de la signature :", erreurUpload);
-      afficherMessageEnvoi(idCanvas, "❌ Échec de l'envoi. Réessaie.");
-      afficherToast("❌ Échec de l'envoi de la signature.", "erreur");
-      return;
+      if (erreurUpload) {
+        console.error("Erreur lors de l'envoi de la signature :", erreurUpload);
+        afficherMessageEnvoi(idCanvas, "❌ Échec de l'envoi. Réessaie.");
+        afficherToast("❌ Échec de l'envoi de la signature.", "erreur");
+        return;
+      }
+
+      var { error: erreurTable } = await supabase.from("signatures").insert({
+        visiteur_id: visiteurId,
+        signataire: signataire,
+        chemin_fichier: nomFichier
+      });
+
+      if (erreurTable) {
+        console.error("Erreur lors de l'enregistrement de la signature :", erreurTable);
+        afficherToast("❌ Signature envoyée mais non enregistrée.", "erreur");
+        return;
+      }
+
+      afficherMessageEnvoi(idCanvas, "✅ C'est bon, le candidat a bien reçu votre signature !");
+      afficherToast("✅ C'est bon, le candidat a bien reçu votre signature !", "succes");
+    } catch (erreurInattendue) {
+      // Même filet de sécurité que pour enregistrerDecision : on affiche
+      // l'erreur au lieu de la laisser disparaître silencieusement.
+      console.error("Erreur inattendue dans envoyerSignature :", erreurInattendue);
+      afficherMessageEnvoi(idCanvas, "❌ Erreur technique (voir console).");
+      afficherToast("❌ Erreur technique (voir console).", "erreur");
     }
-
-    var { error: erreurTable } = await supabase.from("signatures").insert({
-      visiteur_id: visiteurId,
-      signataire: signataire,
-      chemin_fichier: nomFichier
-    });
-
-    if (erreurTable) {
-      console.error("Erreur lors de l'enregistrement de la signature :", erreurTable);
-      afficherToast("❌ Signature envoyée mais non enregistrée.", "erreur");
-      return;
-    }
-
-    afficherMessageEnvoi(idCanvas, "✅ Signature envoyée.");
-    afficherToast("✅ Signature bien reçue, merci !", "succes");
   }, "image/png");
 }
 
