@@ -158,12 +158,12 @@ function lancerAnalyseMere() {
   bloc.classList.add("visible");
 
   var etapes = [
-    "Analyse faciale en cours...",
+    "Analyse en cours...",
+    "Vérification de la compatibilité...",
+    "Vérification des traits du visage...",
     "Comparaison avec le profil d'Athina...",
-    "Taux de ressemblance : anormalement élevé.",
-    "Tentative de différenciation des deux profils...",
-    "⚠️ ERREUR — Impossible de distinguer la mère de la fille.",
-    "❌ SYSTÈME EN PANNE — Ressemblance trop élevée pour être traitée. Veuillez réessayer avec un être humain moins parfaitement dupliqué."
+    "Vérification du dossier Christopher...",
+    "❌ ERREUR — Le système confond la mère avec sa fille, la ressemblance est trop élevée."
   ];
 
   var indexEtape = 0;
@@ -188,7 +188,7 @@ var messagesRefus = [
   "Êtes-vous vraiment sûr ?",
   "Êtes-vous vraiment vraiment sûr ?",
   "Dernière chance.",
-  "🤖 ERREUR 404 : AUCUNE RÉPONSE ACCEPTABLE DÉTECTÉE DANS VOTRE SYSTÈME DE DÉCISION."
+  "ERREUR 404 : AUCUNE RÉPONSE ACCEPTABLE DÉTECTÉE DANS VOTRE SYSTÈME DE DÉCISION. VEUILLEZ RÉESSAYER."
 ];
 
 function cliquerRefuser() {
