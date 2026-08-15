@@ -87,7 +87,6 @@ body {
 /* Corps du dossier : une seule "page" visible à la fois */
 .corps {
   padding: 32px 28px 24px;
-  min-height: 420px;
 }
 
 /* Chaque page est une div ; toutes cachées sauf celle active */
