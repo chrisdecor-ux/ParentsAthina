@@ -126,17 +126,19 @@ function lancerAnalysePere() {
   bloc.classList.add("visible");
 
   // Liste des messages à afficher les uns après les autres
+  // (le HTML est autorisé ici pour pouvoir insérer la barre rouge juste avant l'erreur)
   var etapes = [
     "Analyse en cours...",
     "Vérification de la compatibilité...",
     "Vérification de l'humour...",
     "Vérification du niveau de folie...",
     "Vérification du dossier Christopher...",
+    '<div class="jauge-fond"><div class="jauge-remplie depasse" style="width:100%"></div></div>',
     "❌ ERREUR — Le père est trop puissant pour être simulé."
   ];
 
   var indexEtape = 0;
-  bloc.textContent = etapes[0];
+  bloc.innerHTML = etapes[0];
 
   // On affiche chaque message toutes les 900 millisecondes
   var minuteur = setInterval(function() {
@@ -145,29 +147,31 @@ function lancerAnalysePere() {
       clearInterval(minuteur);
       return;
     }
-    bloc.textContent = etapes[indexEtape];
+    bloc.innerHTML = etapes[indexEtape];
   }, 900);
 }
 
 /* ============================================================
    PAGE "ÉVALUATION DE LA MÈRE" : petite animation de fausse analyse
-   qui se termine par un crash lié à la ressemblance mère/fille
+   qui calcule vraiment les chances d'approbation, puis qui se
+   termine par un crash lié à la ressemblance mère/fille
    ============================================================ */
 function lancerAnalyseMere() {
   var bloc = document.getElementById("resultat-analyse-mere");
   bloc.classList.add("visible");
 
   var etapes = [
-    "Analyse en cours...",
-    "Vérification de la compatibilité...",
-    "Vérification des traits du visage...",
+    "Calcul de la compatibilité avec la mère en cours...",
+    "Estimation des chances d'approbation...",
+    "Analyse du profil de la mère en cours...",
     "Comparaison avec le profil d'Athina...",
-    "Vérification du dossier Christopher...",
+    "⚠️ Interruption détectée — corruption des données du profil analysé.",
+    '<div class="jauge-fond"><div class="jauge-remplie depasse" style="width:100%"></div></div>',
     "❌ ERREUR — Le système confond la mère avec sa fille, la ressemblance est trop élevée."
   ];
 
   var indexEtape = 0;
-  bloc.textContent = etapes[0];
+  bloc.innerHTML = etapes[0];
 
   var minuteur = setInterval(function() {
     indexEtape = indexEtape + 1;
@@ -175,7 +179,7 @@ function lancerAnalyseMere() {
       clearInterval(minuteur);
       return;
     }
-    bloc.textContent = etapes[indexEtape];
+    bloc.innerHTML = etapes[indexEtape];
   }, 900);
 }
 
