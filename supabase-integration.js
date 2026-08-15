@@ -108,7 +108,6 @@ async function envoyerSignature(idCanvas, signataire) {
   if (!canvas) return;
 
   if (!supabaseClient) {
-    afficherMessageEnvoi(idCanvas, "❌ L'envoi de la signature au candidat a échoué.");
     afficherToast("❌ L'envoi de la signature au candidat a échoué.", "erreur");
     return;
   }
@@ -126,7 +125,6 @@ async function envoyerSignature(idCanvas, signataire) {
 
       if (erreurUpload) {
         console.error("Erreur lors de l'envoi de la signature :", erreurUpload);
-        afficherMessageEnvoi(idCanvas, "❌ L'envoi de la signature au candidat a échoué.");
         afficherToast("❌ L'envoi de la signature au candidat a échoué.", "erreur");
         return;
       }
@@ -139,32 +137,18 @@ async function envoyerSignature(idCanvas, signataire) {
 
       if (erreurTable) {
         console.error("Erreur lors de l'enregistrement de la signature :", erreurTable);
-        afficherMessageEnvoi(idCanvas, "❌ L'envoi de la signature au candidat a échoué.");
         afficherToast("❌ L'envoi de la signature au candidat a échoué.", "erreur");
         return;
       }
 
-      afficherMessageEnvoi(idCanvas, "✅ Le candidat a bien reçu votre signature.");
       afficherToast("✅ Le candidat a bien reçu votre signature.", "succes");
     } catch (erreurInattendue) {
       // Même filet de sécurité que pour enregistrerDecision : on affiche
       // l'erreur au lieu de la laisser disparaître silencieusement.
       console.error("Erreur inattendue dans envoyerSignature :", erreurInattendue);
-      afficherMessageEnvoi(idCanvas, "❌ L'envoi de la signature au candidat a échoué.");
       afficherToast("❌ L'envoi de la signature au candidat a échoué.", "erreur");
     }
   }, "image/png");
-}
-
-// Petit message de confirmation affiché sous le canvas concerné
-// (reste discret, en plus de la notification popup).
-function afficherMessageEnvoi(idCanvas, texte) {
-  var id = "confirmation-" + idCanvas;
-  var bloc = document.getElementById(id);
-  if (bloc) {
-    bloc.textContent = texte;
-    bloc.style.display = "block";
-  }
 }
 
 // Notification "toast" qui apparaît en haut de l'écran quelques
@@ -174,6 +158,15 @@ var minuteurToast = null;
 function afficherToast(texte, type) {
   var toast = document.getElementById("toast");
   if (!toast) return;
+
+  // On retire d'abord la classe "visible" et on force le navigateur à
+  // "digérer" ce changement (reflow) avant de la remettre. Ça garantit
+  // que la notification rejoue toujours son animation d'apparition,
+  // même si on clique deux fois de suite sur "Envoyer" avec le même
+  // texte de résultat — la personne voit bien que ça vient de se
+  // reproduire, pas juste un texte figé qui ne bouge plus.
+  toast.classList.remove("visible");
+  void toast.offsetWidth;
 
   toast.textContent = texte;
   toast.className = "toast visible" + (type ? " " + type : "");
