@@ -9,7 +9,24 @@
 const SUPABASE_URL = "https://zyhsgdrdifasllyjkait.supabase.co";
 const SUPABASE_CLE_PUBLIQUE = "sb_publishable_d8ie8GqPf9G8Ei3L0FDuFw_SXxsgJWB";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_CLE_PUBLIQUE);
+// On vérifie que la librairie Supabase (chargée depuis le CDN, dans le
+// <script> juste avant celui-ci) est bien disponible AVANT de s'en servir.
+// Si elle n'a pas chargé (CDN indisponible, ordre des balises modifié,
+// coupure réseau...), on ne fait plus planter tout ce fichier : on
+// continue avec "supabase = null", et chaque fonction plus bas vérifie
+// ce cas pour afficher un message clair au lieu de laisser les boutons
+// ne rien faire silencieusement.
+var supabase = null;
+if (window.supabase && typeof window.supabase.createClient === "function") {
+  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_CLE_PUBLIQUE);
+} else {
+  console.error(
+    "La librairie Supabase (supabase-js) n'a pas pu être chargée. " +
+    "Vérifie dans index.html que la balise <script> du CDN " +
+    "(cdn.jsdelivr.net/npm/@supabase/supabase-js@2) est bien présente " +
+    "ET placée AVANT <script src=\"supabase-integration.js\">."
+  );
+}
 
 /* ============================================================
    IDENTIFIANT DE VISITEUR
@@ -53,6 +70,11 @@ async function obtenirAdresseIP() {
    de la page finale.
    ============================================================ */
 async function enregistrerDecision(decision) {
+  if (!supabase) {
+    afficherToast("❌ Connexion à la base de données indisponible.", "erreur");
+    return;
+  }
+
   try {
     var visiteurId = obtenirVisiteurId();
     var adresseIP = await obtenirAdresseIP();
@@ -88,6 +110,12 @@ async function enregistrerDecision(decision) {
 async function envoyerSignature(idCanvas, signataire) {
   var canvas = document.getElementById(idCanvas);
   if (!canvas) return;
+
+  if (!supabase) {
+    afficherMessageEnvoi(idCanvas, "❌ Connexion à la base de données indisponible.");
+    afficherToast("❌ Connexion à la base de données indisponible.", "erreur");
+    return;
+  }
 
   var visiteurId = obtenirVisiteurId();
   var nomFichier = signataire + "-" + visiteurId + "-" + Date.now() + ".png";
